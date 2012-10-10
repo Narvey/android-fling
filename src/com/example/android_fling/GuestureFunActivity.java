@@ -3,6 +3,7 @@ package com.example.android_fling;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.widget.FrameLayout;
 
 public class GuestureFunActivity extends Activity {
 
@@ -10,6 +11,9 @@ public class GuestureFunActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guesture_fun);
+        FrameLayout frame = (FrameLayout) findViewById(R.id.graphics_holder);
+        PlayAreaView image - new PlayAreaView(this);
+        frame.addView(image);
     }
 
     @Override
