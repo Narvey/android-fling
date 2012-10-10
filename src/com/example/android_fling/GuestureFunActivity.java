@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.widget.FrameLayout;
 
 public class GuestureFunActivity extends Activity {
+	public static final String DEBUG_TAG="GuestureFunActivity";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
