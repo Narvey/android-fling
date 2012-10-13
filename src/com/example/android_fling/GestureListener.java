@@ -1,8 +1,10 @@
 package com.example.android_fling;
 
+import android.util.Log;
 import android.view.GestureDetector.OnDoubleTapListener;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
+import com.example.android_fling.GestureFunActivity.PlayAreaView;
 
 public class GestureListener implements OnGestureListener, OnDoubleTapListener {
 	PlayAreaView view;
@@ -30,8 +32,8 @@ public class GestureListener implements OnGestureListener, OnDoubleTapListener {
 
 	@Override
 	public boolean onDown(MotionEvent arg0) {
-		// TODO Auto-generated method stub
-		return false;
+		Log.v(GestureFunActivity.DEBUG_TAG, "onDown");  
+	    return true; 
 	}
 
 	@Override
