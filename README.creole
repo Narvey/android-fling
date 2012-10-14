@@ -1,0 +1,6 @@
+==Readme==
+
+I apologize, I had to pretty much destroy all my changes to get a semi-working set of code. Basically what needs to be done is:
+* add images
+* add fling and other gestures (starting at onDown method in tutorial)
+* check if other tutorials have necessary info
