@@ -47,11 +47,16 @@ public class GestureFunActivity extends Activity {
     		gestures = new GestureDetector(GestureFunActivity.this,
     				new GestureListener(this));
     		droid = BitmapFactory.decodeResource(getResources(),
-    				R.drawable.droid_g);
+    				R.drawable.ic_android);
     	}
     	@Override  
     	public boolean onTouchEvent(MotionEvent event) {  
     	    return gestures.onTouchEvent(event);  
+    	}  
+    	
+    	public void move(float dx, float dy) {  
+    	    translate.postTranslate(dx, dy);  
+    	    invalidate();  
     	}  
     }
 }

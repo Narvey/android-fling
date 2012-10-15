@@ -1,4 +1,4 @@
-==Readme==
+==Readme for android-fling app==
 
 I apologize, I had to pretty much destroy all my changes to get a semi-working set of code. Basically what needs to be done is:
 * add images
