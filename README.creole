@@ -1,7 +1,7 @@
 ==Readme for android-fling app==
 I decided to name some of the functions differently because they are less of event
 handlers and more of "do this to the object" functions. For example, I named it 
-<code>resetLocation()</code> instead of <code>onResetLocation()</code>.
+''resetLocation()'' instead of ''onResetLocation()''.
 
 ===Still needs to be done===
 * add images--almost done
