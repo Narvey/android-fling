@@ -1,9 +1,9 @@
 ==Readme for android-fling app==
 I decided to name some of the functions differently because they are less of event
 handlers and more of "do this to the object" functions. For example, I named it 
-_resetLocation()_ instead of _onResetLocation()_.
+<code>resetLocation()</code> instead of <code>onResetLocation()</code>.
 
-Basically what needs to be done is:
+===Still needs to be done===
 * add images--almost done
 * add fling and other gestures
 * check if other tutorials have necessary info
