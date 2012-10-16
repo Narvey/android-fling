@@ -135,9 +135,11 @@ public class GestureFunActivity extends Activity {
 		}
 
 		@Override
-		public boolean onSingleTapConfirmed(MotionEvent arg0) {
-			// TODO Auto-generated method stub
-			return false;
+		public boolean onSingleTapConfirmed(MotionEvent ev) {
+			Log.v(DEBUG_TAG, "onSingleTapConfirmed");
+			view.resetLocation();
+			view.move(ev.getX(), ev.getY());
+			return true;
 		}
 
 		@Override
