@@ -96,6 +96,14 @@ public class GestureFunActivity extends Activity {
 			return y;
 		}
 
+		public float getwidth(){
+			return (float) bmp.getWidth();
+		}
+		
+		public float getheight(){
+			return (float) bmp.getHeight();
+		}
+		
 		public void sety(int ypos) {
 			y = ypos;
 		}
