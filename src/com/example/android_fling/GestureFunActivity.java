@@ -1,5 +1,8 @@
 package com.example.android_fling;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import javax.xml.datatype.Duration;
 
 import android.app.Activity;
@@ -9,6 +12,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat.Action;
 import android.util.Log;
@@ -21,24 +25,72 @@ import android.view.View;
 import android.view.animation.Interpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class GestureFunActivity extends Activity {
 	public static final String DEBUG_TAG="GestureFunActivity";
+	private ArrayList<Target> targets = new ArrayList<Target>(6);
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_gesture_fun);
 		FrameLayout frame = (FrameLayout) findViewById(R.id.graphics_holder);
+		targets.get(0).setBitmap(R.drawable.ic_android);
+		targets.get(1).setBitmap(R.drawable.ic_android_orange);
+		targets.get(2).setBitmap(R.drawable.ic_cat_orange);
+		targets.get(3).setBitmap(R.drawable.ic_plus_signs_sophie);
+		targets.get(4).setBitmap(R.drawable.ic_launcher);
+		targets.get(5).setBitmap(R.drawable.ic_action_search);
+		Random r = new Random();
+		for (Target img : targets){
+			img.setx(r.nextInt()%frame.getWidth());
+			img.sety(r.nextInt()%frame.getHeight());
+			frame.addView(img);
+		}
 		PlayAreaView image = new PlayAreaView(this);
 		frame.addView(image);
+		
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_gesture_fun, menu);
 		return true;
+	}
+	
+	public class Target extends View {
+		private int x;
+		private int y;
+		private Bitmap bmp;
+		public Target(Context context) {
+			super(context);
+			// TODO Auto-generated constructor stub
+		}
+		
+		public int getx() {
+			return x;
+		}
+
+		public void setx(int xpos) {
+			x = xpos;
+		}
+
+		public int gety() {
+			return y;
+		}
+
+		public void sety(int ypos) {
+			y = ypos;
+		}
+
+		protected void onDraw(Canvas canvas) {  
+			canvas.drawBitmap(bmp, x, y, null);  
+		}  
+		public void setBitmap(int res){
+			bmp = BitmapFactory.decodeResource(getResources(), res);
+		}
 	}
 	
 	public class PlayAreaView extends View {
@@ -60,10 +112,8 @@ public class GestureFunActivity extends Activity {
 		public PlayAreaView(Context context) {
 			super(context);
 			translate = new Matrix();
-			gestures = new GestureDetector(GestureFunActivity.this,
-					new GestureListener(this));
-			droid = BitmapFactory.decodeResource(getResources(),
-					R.drawable.ic_android);
+			gestures = new GestureDetector(GestureFunActivity.this,new GestureListener(this));
+			droid = BitmapFactory.decodeResource(getResources(),R.drawable.ic_android);
 		}
 		@Override  
 		public boolean onTouchEvent(MotionEvent event) {  
