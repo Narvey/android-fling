@@ -244,7 +244,17 @@ public class GestureFunActivity extends Activity {
 		}
 
 		private Target FindClosestTarget(float x, float y, float vx, float vy){
-			//use GestureFunActivity.this.targets
+			float xTrack = x;
+			float yTrack = y;
+			while(xTrack < GestureFunActivity.this.totalWidth && y < GestureFunActivity.this.totalHeight){
+				for(int i = 0; i < GestureFunActivity.this.targets.size(); i++){
+					if(xTrack == GestureFunActivity.this.targets.get(i).x && yTrack == GestureFunActivity.this.targets.get(i).y){
+						return GestureFunActivity.this.targets.get(i);
+					}
+				}
+				xTrack = xTrack + vx;
+				yTrack = yTrack + vy;
+			}
 			return null;//if there isn't one
 		}
 		
