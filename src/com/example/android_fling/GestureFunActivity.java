@@ -246,7 +246,9 @@ public class GestureFunActivity extends Activity {
 		private Target FindClosestTarget(float x, float y, float vx, float vy){
 			float xTrack = x;
 			float yTrack = y;
-			while(xTrack < GestureFunActivity.this.totalWidth && y < GestureFunActivity.this.totalHeight){
+			vx = (float) (vx / (Math.sqrt(vx*vx+vy*vy)));
+			vy = (float) (vy / (Math.sqrt(vx*vx+vy*vy)));
+			while(xTrack < GestureFunActivity.this.totalWidth && yTrack < GestureFunActivity.this.totalHeight && xTrack > 0 && yTrack > 0){
 				for(int i = 0; i < GestureFunActivity.this.targets.size(); i++){
 					if(xTrack == GestureFunActivity.this.targets.get(i).x && yTrack == GestureFunActivity.this.targets.get(i).y){
 						return GestureFunActivity.this.targets.get(i);
