@@ -30,24 +30,27 @@ import android.widget.Toast;
 
 public class GestureFunActivity extends Activity {
 	public static final String DEBUG_TAG="GestureFunActivity";
-	private ArrayList<Target> targets = new ArrayList<Target>(6);
+	public static final int TARGETS=6;
+	private int[] images = new int[TARGETS];
+	private ArrayList<Target> targets = new ArrayList<Target>(TARGETS);
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_gesture_fun);
 		FrameLayout frame = (FrameLayout) findViewById(R.id.graphics_holder);
-		targets.get(0).setBitmap(R.drawable.ic_android);
-		targets.get(1).setBitmap(R.drawable.ic_android_orange);
-		targets.get(2).setBitmap(R.drawable.ic_cat_orange);
-		targets.get(3).setBitmap(R.drawable.ic_plus_signs_sophie);
-		targets.get(4).setBitmap(R.drawable.ic_launcher);
-		targets.get(5).setBitmap(R.drawable.ic_action_search);
+		images[0] = R.drawable.ic_android;            
+		images[1] = R.drawable.ic_android_orange;     
+		images[2] = R.drawable.ic_cat_orange;        
+		images[3] = R.drawable.ic_plus_signs_sophie;  
+		images[4] = R.drawable.ic_launcher;          
+		images[5] = R.drawable.ic_action_search;      
 		Random r = new Random();
-		for (Target img : targets){
-			img.setx(r.nextInt()%frame.getWidth());
-			img.sety(r.nextInt()%frame.getHeight());
-			frame.addView(img);
+		for (int i = 0;i< TARGETS;i++){
+			targets.add(new Target(this));
+			targets.get(i).setx(r.nextInt()%frame.getWidth());
+			targets.get(i).sety(r.nextInt()%frame.getHeight());
+			frame.addView(targets.get(i));
 		}
 		PlayAreaView image = new PlayAreaView(this);
 		frame.addView(image);
