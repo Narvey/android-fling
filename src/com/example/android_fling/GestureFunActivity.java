@@ -48,8 +48,8 @@ public class GestureFunActivity extends Activity {
 		Random r = new Random();
 		for (int i = 0;i< TARGETS;i++){
 			targets.add(new Target(this));
-			targets.get(i).setx(r.nextInt()%frame.getWidth());
-			targets.get(i).sety(r.nextInt()%frame.getHeight());
+			targets.get(i).setx(r.nextInt()%frame.getLayoutParams().width);
+			targets.get(i).sety(r.nextInt()%frame.getLayoutParams().height);
 			frame.addView(targets.get(i));
 		}
 		PlayAreaView image = new PlayAreaView(this);

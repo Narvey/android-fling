@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Drag the droid around"
+        android:text="Fling at a target"
         tools:context=".GestureFunActivity" />
 	<FrameLayout android:id="@+id/graphics_holder"
 	    android:layout_height="match_parent"
