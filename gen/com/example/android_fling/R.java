@@ -17,8 +17,9 @@ public final class R {
         public static final int ic_cat_gray=0x7f020003;
         public static final int ic_cat_orange=0x7f020004;
         public static final int ic_cat_tuxedo=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
-        public static final int ic_plus_signs_sophie=0x7f020007;
+        public static final int ic_dart=0x7f020006;
+        public static final int ic_launcher=0x7f020007;
+        public static final int ic_plus_signs_sophie=0x7f020008;
     }
     public static final class id {
         public static final int graphics_holder=0x7f070000;

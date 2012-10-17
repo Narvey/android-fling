@@ -103,7 +103,7 @@ public class GestureFunActivity extends Activity {
 	
 	public class PlayAreaView extends View {
 		private Matrix translate;  
-		private Bitmap droid;
+		private Bitmap dart;
 		private GestureDetector gestures;
 		private Matrix animateStart;  
 		private Interpolator animateInterpolator;  
@@ -112,7 +112,7 @@ public class GestureFunActivity extends Activity {
 		private float totalAnimDx;  
 		private float totalAnimDy;  
 		protected void onDraw(Canvas canvas) {  
-			canvas.drawBitmap(droid, translate, null);  
+			canvas.drawBitmap(dart, translate, null);  
 			Matrix m = canvas.getMatrix();
 			Log.d(GestureFunActivity.DEBUG_TAG, "Matrix: "+translate.toShortString());  
 			Log.d(GestureFunActivity.DEBUG_TAG, "Canvas: "+m.toShortString());
@@ -121,7 +121,7 @@ public class GestureFunActivity extends Activity {
 			super(context);
 			translate = new Matrix();
 			gestures = new GestureDetector(GestureFunActivity.this,new GestureListener(this));
-			droid = BitmapFactory.decodeResource(getResources(),drawable.btn_star);
+			dart = BitmapFactory.decodeResource(getResources(),R.drawable.ic_dart);
 		}
 		@Override  
 		public boolean onTouchEvent(MotionEvent event) {  
