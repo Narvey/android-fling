@@ -62,6 +62,16 @@ public class GestureFunActivity extends Activity {
 		
 	}
 
+	@Override
+	public void onResume(){
+		Random r = new Random();
+		for (int i = 0;i< TARGETS;i++){
+			targets.get(i).setx(Math.abs(r.nextInt())%totalWidth);
+			targets.get(i).sety(Math.abs(r.nextInt())%totalHeight);
+		}
+
+	}
+	
 	private void setWidthHeight (int wid, int hei){
 		totalWidth=wid;
 		totalHeight=hei;
@@ -240,13 +250,14 @@ public class GestureFunActivity extends Activity {
 				view.resetLocation();
 				view.move(targ.getx(), targ.gety());
 				return true;
-			}
+			}else{
 			final float distanceTimeFactor = (float) 0.4;  
 			final float totalDx = (distanceTimeFactor * velocityX/2);  
 			final float totalDy = (distanceTimeFactor * velocityY/2);  
 			view.animateMove(totalDx, totalDy,  
 					(long) (1000 * distanceTimeFactor));  
 			return true; 
+			}
 		}
 
 		@Override
@@ -255,7 +266,7 @@ public class GestureFunActivity extends Activity {
 			Toast.makeText(GestureFunActivity.this,"What do you want?",Toast.LENGTH_LONG).show();
 		}
 
-		private Target FindClosestTarget(float x, float y, float vx, float vy){
+		private Target FindClosestTarget(float x, float y, float vy, float vx){
 			float xTrack = x;
 			float yTrack = y;
 			float pythagval = (float) Math.sqrt(vx*vx+vy*vy);
@@ -263,7 +274,7 @@ public class GestureFunActivity extends Activity {
 			vy = (float) (vy / pythagval);
 			while(xTrack < GestureFunActivity.this.totalWidth && yTrack < GestureFunActivity.this.totalHeight && xTrack >= 0 && yTrack >= 0){
 				for(Target curtarg : GestureFunActivity.this.targets){
-					if(xTrack >= curtarg.getx() && xTrack <= curtarg.getwidth() && yTrack >= curtarg.gety() && yTrack <= curtarg.getheight()){
+					if(xTrack >= curtarg.getx() && (xTrack <= (curtarg.getx()+curtarg.getwidth())) && yTrack >= curtarg.gety() &&( yTrack <= (curtarg.gety()+curtarg.getheight()))){
 						return curtarg;
 					}
 				}
