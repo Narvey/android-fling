@@ -69,7 +69,9 @@ public class GestureFunActivity extends Activity {
 		private Bitmap bmp;
 		public Target(Context context) {
 			super(context);
-			// TODO Auto-generated constructor stub
+			x=0;
+			y=0;
+			bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_search);
 		}
 		
 		public int getx() {
