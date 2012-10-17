@@ -232,12 +232,14 @@ public class GestureFunActivity extends Activity {
 		public boolean onFling(MotionEvent arg0, MotionEvent arg1, float velocityX,
 				float velocityY) {
 			Log.v(DEBUG_TAG, "onFling");  
-			int[] pos=new int[2];
-			view.getLocationInWindow(pos);
+			float[] pos=new float[2];
+			view.translate.mapPoints(pos);
 			Target targ = FindClosestTarget(pos[0],pos[1],velocityX,velocityY);
 			if(targ!=null){
+				Toast.makeText(GestureFunActivity.this, "Direct hit", Toast.LENGTH_SHORT).show();
 				view.resetLocation();
 				view.move(targ.getx(), targ.gety());
+				return true;
 			}
 			final float distanceTimeFactor = (float) 0.4;  
 			final float totalDx = (distanceTimeFactor * velocityX/2);  
@@ -256,12 +258,13 @@ public class GestureFunActivity extends Activity {
 		private Target FindClosestTarget(float x, float y, float vx, float vy){
 			float xTrack = x;
 			float yTrack = y;
-			vx = (float) (vx / (Math.sqrt(vx*vx+vy*vy)));
-			vy = (float) (vy / (Math.sqrt(vx*vx+vy*vy)));
-			while(xTrack < GestureFunActivity.this.totalWidth && yTrack < GestureFunActivity.this.totalHeight && xTrack > 0 && yTrack > 0){
-				for(int i = 0; i < GestureFunActivity.this.targets.size(); i++){
-					if(xTrack >= GestureFunActivity.this.targets.get(i).x && xTrack <= GestureFunActivity.this.targets.get(i).getwidth() && yTrack >= GestureFunActivity.this.targets.get(i).y && yTrack <= GestureFunActivity.this.targets.get(i).getheight()){
-						return GestureFunActivity.this.targets.get(i);
+			float pythagval = (float) Math.sqrt(vx*vx+vy*vy);
+			vx = (float) (vx / pythagval);
+			vy = (float) (vy / pythagval);
+			while(xTrack < GestureFunActivity.this.totalWidth && yTrack < GestureFunActivity.this.totalHeight && xTrack >= 0 && yTrack >= 0){
+				for(Target curtarg : GestureFunActivity.this.targets){
+					if(xTrack >= curtarg.getx() && xTrack <= curtarg.getwidth() && yTrack >= curtarg.gety() && yTrack <= curtarg.getheight()){
+						return curtarg;
 					}
 				}
 				xTrack = xTrack + vx;
