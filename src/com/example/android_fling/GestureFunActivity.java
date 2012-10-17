@@ -48,8 +48,8 @@ public class GestureFunActivity extends Activity {
 		Random r = new Random();
 		for (int i = 0;i< TARGETS;i++){
 			targets.add(new Target(this));
-			targets.get(i).setx(r.nextInt()%frame.getLayoutParams().width);
-			targets.get(i).sety(r.nextInt()%frame.getLayoutParams().height);
+			targets.get(i).setx(r.nextInt()%frame.getMeasuredWidth());
+			targets.get(i).sety(r.nextInt()%frame.getMeasuredHeight());
 			frame.addView(targets.get(i));
 		}
 		PlayAreaView image = new PlayAreaView(this);
@@ -110,7 +110,7 @@ public class GestureFunActivity extends Activity {
 		private float totalAnimDy;  
 		protected void onDraw(Canvas canvas) {  
 			canvas.drawBitmap(droid, translate, null);  
-			Matrix m = canvas.getMatrix();  
+			Matrix m = canvas.getMatrix();
 			Log.d(GestureFunActivity.DEBUG_TAG, "Matrix: "+translate.toShortString());  
 			Log.d(GestureFunActivity.DEBUG_TAG, "Canvas: "+m.toShortString());
 		}  
