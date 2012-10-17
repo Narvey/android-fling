@@ -5,6 +5,7 @@ import java.util.Random;
 
 import javax.xml.datatype.Duration;
 
+import android.R.drawable;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +29,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+
 public class GestureFunActivity extends Activity {
 	public static final String DEBUG_TAG="GestureFunActivity";
 	public static final int TARGETS=6;
@@ -49,8 +51,8 @@ public class GestureFunActivity extends Activity {
 		for (int i = 0;i< TARGETS;i++){
 			targets.add(new Target(this));
 			targets.get(i).setBitmap(images[i]);
-			targets.get(i).setx(r.nextInt()%200);
-			targets.get(i).sety(r.nextInt()%400);
+			targets.get(i).setx(Math.abs(r.nextInt())%200);
+			targets.get(i).sety(Math.abs(r.nextInt())%400);
 			frame.addView(targets.get(i));
 		}
 		PlayAreaView image = new PlayAreaView(this);
@@ -119,7 +121,7 @@ public class GestureFunActivity extends Activity {
 			super(context);
 			translate = new Matrix();
 			gestures = new GestureDetector(GestureFunActivity.this,new GestureListener(this));
-			droid = BitmapFactory.decodeResource(getResources(),R.drawable.ic_android);
+			droid = BitmapFactory.decodeResource(getResources(),drawable.btn_star);
 		}
 		@Override  
 		public boolean onTouchEvent(MotionEvent event) {  
@@ -150,6 +152,7 @@ public class GestureFunActivity extends Activity {
 		        }
 		    });  
 		}
+		
 		protected void animateStep() {
 		    long curTime = System.currentTimeMillis();  
 		    float percentTime = (float) (curTime - startTime)  
@@ -208,6 +211,11 @@ public class GestureFunActivity extends Activity {
 		public boolean onFling(MotionEvent arg0, MotionEvent arg1, float velocityX,
 				float velocityY) {
 			Log.v(DEBUG_TAG, "onFling");  
+			Target targ = FindClosestTarget(view.getX(),view.getY(),velocityX,velocityY);
+			if(targ!=null){
+				view.resetLocation();
+				view.move(targ.getx(), targ.gety());
+			}
 			final float distanceTimeFactor = (float) 0.4;  
 			final float totalDx = (distanceTimeFactor * velocityX/2);  
 			final float totalDy = (distanceTimeFactor * velocityY/2);  
@@ -222,6 +230,11 @@ public class GestureFunActivity extends Activity {
 			Toast.makeText(GestureFunActivity.this,"What do you want?",Toast.LENGTH_LONG).show();
 		}
 
+		private Target FindClosestTarget(float x, float y, float vx, float vy){
+			//use GestureFunActivity.this.targets
+			return null;//if there isn't one
+		}
+		
 		@Override
 		public boolean onScroll(MotionEvent arg0, MotionEvent arg1, float distanceX,
 				float distanceY) {
