@@ -34,6 +34,8 @@ public class GestureFunActivity extends Activity {
 	public static final String DEBUG_TAG="GestureFunActivity";
 	public static final int TARGETS=6;
 	private int[] images = new int[TARGETS];
+	private int totalWidth = 200;//width in which images can be placed
+	private int totalHeight = 400;//height in which images can be placed
 	private ArrayList<Target> targets = new ArrayList<Target>(TARGETS);
 	
 	@Override
@@ -51,8 +53,8 @@ public class GestureFunActivity extends Activity {
 		for (int i = 0;i< TARGETS;i++){
 			targets.add(new Target(this));
 			targets.get(i).setBitmap(images[i]);
-			targets.get(i).setx(Math.abs(r.nextInt())%200);
-			targets.get(i).sety(Math.abs(r.nextInt())%400);
+			targets.get(i).setx(Math.abs(r.nextInt())%totalWidth);
+			targets.get(i).sety(Math.abs(r.nextInt())%totalHeight);
 			frame.addView(targets.get(i));
 		}
 		PlayAreaView image = new PlayAreaView(this);
@@ -60,6 +62,11 @@ public class GestureFunActivity extends Activity {
 		
 	}
 
+	private void setWidthHeight (int wid, int hei){
+		totalWidth=wid;
+		totalHeight=hei;
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_gesture_fun, menu);
@@ -152,7 +159,13 @@ public class GestureFunActivity extends Activity {
 		        }
 		    });  
 		}
-		
+
+		@Override
+		protected void onSizeChanged(int xNew, int yNew, int xOld, int yOld){
+			super.onSizeChanged(xNew, yNew, xOld, yOld);
+			GestureFunActivity.this.setWidthHeight(xNew, yNew);
+		}
+
 		protected void animateStep() {
 		    long curTime = System.currentTimeMillis();  
 		    float percentTime = (float) (curTime - startTime)  
