@@ -211,7 +211,7 @@ public class GestureFunActivity extends Activity {
 		public boolean onFling(MotionEvent arg0, MotionEvent arg1, float velocityX,
 				float velocityY) {
 			Log.v(DEBUG_TAG, "onFling");  
-			Target targ = FindClosestTarget(view.getX(),view.getY(),velocityX,velocityY);
+			Target targ = FindClosestTarget(view.getLeft(),view.getTop(),velocityX,velocityY);
 			if(targ!=null){
 				view.resetLocation();
 				view.move(targ.getx(), targ.gety());
