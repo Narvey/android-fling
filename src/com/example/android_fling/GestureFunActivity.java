@@ -260,7 +260,7 @@ public class GestureFunActivity extends Activity {
 			vy = (float) (vy / (Math.sqrt(vx*vx+vy*vy)));
 			while(xTrack < GestureFunActivity.this.totalWidth && yTrack < GestureFunActivity.this.totalHeight && xTrack > 0 && yTrack > 0){
 				for(int i = 0; i < GestureFunActivity.this.targets.size(); i++){
-					if(xTrack == GestureFunActivity.this.targets.get(i).x && yTrack == GestureFunActivity.this.targets.get(i).y){
+					if(xTrack >= GestureFunActivity.this.targets.get(i).x && xTrack <= GestureFunActivity.this.targets.get(i).getwidth() && yTrack >= GestureFunActivity.this.targets.get(i).y && yTrack <= GestureFunActivity.this.targets.get(i).getheight()){
 						return GestureFunActivity.this.targets.get(i);
 					}
 				}
